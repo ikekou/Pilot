@@ -4,6 +4,12 @@ export default function Listener (pilot) {
   this.server = dgram.createSocket('udp4')
 
   this.server.on('message', (msg, rinfo) => {
+    // remove null-terminated string
+    const msgStr = (()=>{
+      const s = `${msg}`
+      return (s && s[s.length-1]==='\0') ? s.slice(0,-1) : s
+    })()
+
     pilot.mixer.run(`${msg}`)
   })
 
