@@ -10,7 +10,7 @@ export default function Listener (pilot) {
       return (s && s[s.length-1]==='\0') ? s.slice(0,-1) : s
     })()
 
-    pilot.mixer.run(`${msg}`)
+    pilot.mixer.run(msgStr)
   })
 
   this.server.on('listening', () => {
